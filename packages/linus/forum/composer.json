@@ -1,0 +1,13 @@
+{
+    "name": "root/forum",
+    "description": "This is my forum package - Linus",
+    "type": "laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Linus",
+            "email": "penxumelb@gmail.com"
+        }
+    ],
+    "require": {}
+}
