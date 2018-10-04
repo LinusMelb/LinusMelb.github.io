@@ -43,7 +43,7 @@
 
   </div>
   <footer class="cd-footer">
-    <p style="height: 60px; color: white" class="copyright">2018 &copy; All Rights Reserved. &nbsp;<i class="fab fa-weixin"></i>&nbsp;Wechat: unimodsau</span></p>
+    <p style="height: 60px; color: white" class="copyright">2018 &copy; All Rights Reserved by Linus Peng. &nbsp;<i class="fab fa-weixin"></i>&nbsp;Wechat: unimodsau</span></p>
   </footer>
   <!-- <div class="cd-notification">
     <p>Reading progress indicator not visible on small devices</p>
@@ -60,31 +60,47 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>
 
-  var markDownArticleName = window.location.href.split("#")[1]; // Returns path only
+  var params = window.location.href.split("?")[1];
 
-  if (markDownArticleName == null || markDownArticleName == undefined) {
-    $("#article").html( "<h1>Please type markdown file name. E.g: url#filename</h1>" );
+  if (params == null || params == undefined) {
+    $("#article").html( "<h1>Please type url in right format. E.g: url?category?filename</h1>" );
+    throw new Error("Params format is wrong");
+  }
+
+  var category = params.split("/")[0];
+  var markDownArticleName = params.split("/")[1];
+
+  if (markDownArticleName == null || markDownArticleName == undefined || category == null || category == undefined) {
+    $("#article").html( "<h1>Please type markdown file name. E.g: url?category?filename</h1>" );
     throw new Error("markdown filename is wrong!");
   }
 
-  $.get( "https://github.com/LinusMelb/LinusMelb.github.io/tree/master/blogs/articles/" + markDownArticleName + ".txt", function( data ) {
+  $.ajax({
+    url: "https://raw.githubusercontent.com/LinusMelb/articles/master/"+category+"/" + markDownArticleName + ".md",
+    type: 'GET',
+    crossDomain: true,
+    // dataType: 'jsonp', //change the datatype to 'jsonp' works in most cases
+    // contentType: 'text/plain',
+    success : function(data) {
 
-    var converter = new showdown.Converter(),
-    text      = data,
-    html      = converter.makeHtml(text);
+      var converter = new showdown.Converter(),
+      text      = data,
+      html      = converter.makeHtml(text);
 
-    $("#article").html( html );
-    // alert( "Load was performed." );
+      $("#article").html( html );
+      // alert( "Load was performed." );
 
-    $('pre code').each(function(i, block) {
-      hljs.highlightBlock(block);
-    });
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
 
-  }).fail(function() {
-
-    $("#article").html( "<h1>The file #"+markDownArticleName+".txt# doesn't exist on the web</h1>" );
+    },
+    error : function(error) {
+      $("#article").html( "<h1>The file #"+markDownArticleName+".md# doesn't exist on the web</h1>" );
+    }
 
   });
+
   </script>
 
 </body>
