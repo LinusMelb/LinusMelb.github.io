@@ -36,7 +36,30 @@
     <article>
       <header>
         <!-- <img src="https://codyhouse.co/demo/reading-progress-indicator/img/img-1.png" alt="article image"> -->
-        <h1>Project Lists</h1>
+
+        <div id="articles">
+
+          <h1>Computer</h1>
+          <ul>
+
+            <li>
+              <a href="#">sxsxssxsxs</a>
+            </li>
+          </ul>
+          <div class="divider">
+
+          </div>
+          <h1>Test</h1>
+          <ul>
+            <li>
+              <a href="#">sxsxssxsxs</a>
+            </li>
+            <li>
+              <a href="#">sxsxssxsxs</a>
+            </li>
+          </ul>
+        </div>
+
       </header>
     </article>
 
@@ -47,26 +70,48 @@
   <!-- <div class="cd-notification">
     <p>Reading progress indicator not visible on small devices</p>
   </div> -->
-  <script src="assets/jquery-2.1.4.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
   <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        message: 'Hello Vue!'
-      },
-      created(){
-        this.$http.get('./blog.html').then(response => {
 
-          // get body data
-          console.log(response.body);
+  $.ajax({
+    url: "https://raw.githubusercontent.com/LinusMelb/articles/master/articles.json",
+    type: 'GET',
+    crossDomain: true,
+    // dataType: 'jsonp', //change the datatype to 'jsonp' works in most cases
+    // contentType: 'text/plain',
+    success : function(data) {
 
-        }, response => {
-          // error callback
+      let categories = JSON.parse(data);
+
+      let html = "";
+
+      categories.map(x => {
+
+        html += "<h1>"+x.category+"</h1>";
+        html += "<ul>";
+
+        x.articles.map(article => {
+          html += "<li><a href='./blog.html?"+x.category+"/"+article.name+"'>"+article.title+"</a> ("+article.created_at+")</li>";
         });
-      }
-    });
+
+        html += "</ul>";
+        html += "<div class='divider'></div>";
+
+      });
+
+      $("#articles").html(html);
+
+    },
+    error : function(error) {
+      console.log(error);
+    }
+
+  });
+
+  </script>
   </script>
 </body>
 

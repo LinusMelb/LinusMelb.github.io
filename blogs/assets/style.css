@@ -60,6 +60,20 @@ img, svg {
   line-height: 100px;
 }
 
+
+#articles > ul > li{
+  font-size: 3rem;
+  margin: 2rem 3rem;
+}
+
+#articles > ul > li a:hover{
+   text-decoration: underline;
+}
+
+.divider{
+  border: 1px solid #e6e6e6;
+  margin: 4rem 0rem;
+}
 /* --------------------------------
 
 xnotification
