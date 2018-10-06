@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/highlight-dark.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.css" />
+  <link rel="stylesheet" href="assets/markdown.css">
   <script src="assets/modernizr.js"></script>
 
   <title>Articles</title>
@@ -22,7 +24,7 @@
 
 <body>
   <header class="cd-header">
-    <h1>Articles</h1>
+    <h2>Articles</h2>
     <div class="cd-nugget-info">
       <a href="../">
         <span>
@@ -33,13 +35,14 @@
         <polygon class="cd-nugget-info-arrow" points="15,7 4.4,7 8.4,3 7,1.6 0.6,8 0.6,8 0.6,8 7,14.4 8.4,13 4.4,9 15,9 " />
         </svg>
         </span>
-        Go back
+        <span style="color: white">Go back</span>
       </a>
     </div>
   </header>
-  <div class="cd-articles" id="app">
+  <br />
+  <div class="cd-articles">
 
-    <div id="article"></div>
+    <div id="article" class="markdown"></div>
 
   </div>
   <footer class="cd-footer">
@@ -50,14 +53,22 @@
   </div> -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script> -->
+  <script src="../assets/js/showdown.min.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
-  <script src="https://cdn.rawgit.com/showdownjs/showdown/1.8.6/dist/showdown.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>
+
+  function b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  }
+
 
   var params = window.location.href.split("?")[1];
 
@@ -75,18 +86,24 @@
   }
 
   $.ajax({
-    url: "https://raw.githubusercontent.com/LinusMelb/articles/master/"+category+"/" + markDownArticleName,
+    // url: "https://raw.githubusercontent.com/LinusMelb/articles/master/"+category+"/" + markDownArticleName,
+    url: "https://api.github.com/repos/LinusMelb/articles/contents/"+category+"/"+markDownArticleName,
     type: 'GET',
     crossDomain: true,
     // dataType: 'jsonp', //change the datatype to 'jsonp' works in most cases
     // contentType: 'text/plain',
     success : function(data) {
 
-      var converter = new showdown.Converter(),
-      text      = data,
+      var converter = new showdown.Converter();
+      converter.setOption('strikethrough', true);
+      converter.setOption('tasklists', true);
+      converter.setOption('backslashEscapesHTMLTags', true);
+      converter.setOption('emoji', true);
+
+      var text      = b64DecodeUnicode(data.content),
       html      = converter.makeHtml(text);
 
-      $("#article").html( html );
+      $("#article").html( html);
       // alert( "Load was performed." );
 
       $('pre code').each(function(i, block) {

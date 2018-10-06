@@ -9,9 +9,15 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/highlight-dark.css">
+  <!-- <link rel="stylesheet" href="assets/markdown.css"> -->
   <script src="assets/modernizr.js"></script>
 
   <title>Blogs by Linus Peng</title>
+  <style>
+    ul > li{
+      font-size: 1.3em!important;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,7 +33,7 @@
         <polygon class="cd-nugget-info-arrow" points="15,7 4.4,7 8.4,3 7,1.6 0.6,8 0.6,8 0.6,8 7,14.4 8.4,13 4.4,9 15,9 " />
         </svg>
         </span>
-        Go back
+        <span style="color: white">Go back</span>
       </a>
     </div>
   </header>
@@ -35,29 +41,7 @@
 
     <article>
       <header>
-        <!-- <img src="https://codyhouse.co/demo/reading-progress-indicator/img/img-1.png" alt="article image"> -->
-
         <div id="articles">
-
-          <h1>Computer</h1>
-          <ul>
-
-            <li>
-              <a href="#">sxsxssxsxs</a>
-            </li>
-          </ul>
-          <div class="divider">
-
-          </div>
-          <h1>Test</h1>
-          <ul>
-            <li>
-              <a href="#">sxsxssxsxs</a>
-            </li>
-            <li>
-              <a href="#">sxsxssxsxs</a>
-            </li>
-          </ul>
         </div>
 
       </header>
@@ -90,7 +74,7 @@
 
       categories.map(x => {
 
-        html += "<h1>"+x.category+"</h1>";
+        html += "<h1 style='color: black; font-size: 1.5em'>"+x.category+"</h1>";
         html += "<ul>";
 
         x.articles.map(article => {

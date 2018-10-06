@@ -56,7 +56,7 @@ img, svg {
 }
 .cd-footer p {
   font-family: Georgia, serif;
-  font-size: 1.8rem;
+  font-size: 1.1rem;
   line-height: 100px;
 }
 
@@ -330,7 +330,7 @@ Articles
 .cd-articles article:last-of-type {
   border-bottom: none;
 }
-.cd-articles h1 {
+/* .cd-articles h1 {
   margin: .6em 0 .2em;
   color: #141414;
   line-height: 1.2;
@@ -343,7 +343,7 @@ Articles
 }
 .cd-articles p:last-of-type {
   padding-bottom: 0;
-}
+} */
 @media only screen and (min-width: 1100px) {
   .cd-articles {
     width: 970px;
@@ -354,12 +354,12 @@ Articles
     /* never visible - this is used in jQuery to check the current MQ */
     content: 'desktop';
   }
-  .cd-articles h1 {
+  /* .cd-articles h1 {
     font-size: 3.6rem;
   }
   .cd-articles p {
     font-size: 1.8rem;
-  }
+  } */
 }
 
 /* --------------------------------
