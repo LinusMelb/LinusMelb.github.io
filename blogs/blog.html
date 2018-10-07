@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/highlight-dark.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/agate.min.css" />
   <link rel="stylesheet" href="assets/markdown.css">
   <script src="assets/modernizr.js"></script>
 
@@ -100,7 +100,7 @@
       converter.setOption('backslashEscapesHTMLTags', true);
       converter.setOption('emoji', true);
 
-      var text      = b64DecodeUnicode(data.content),
+      var text  = b64DecodeUnicode(data.content),
       html      = converter.makeHtml(text);
 
       $("#article").html( html);
