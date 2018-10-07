@@ -49,7 +49,7 @@
 
   </div>
   <footer class="cd-footer">
-    <p style="height: 60px; color: white" class="copyright">2018 &copy; All Rights Reserved. &nbsp;<i class="fab fa-weixin"></i>&nbsp;Wechat: unimodsau</span></p>
+    <p style="height: 60px; color: white; font-size: 1.2em" class="copyright">2018 &copy; All Rights Reserved. &nbsp;<i class="fab fa-weixin"></i>&nbsp;Wechat: unimodsau</span></p>
   </footer>
   <!-- <div class="cd-notification">
     <p>Reading progress indicator not visible on small devices</p>
@@ -61,7 +61,7 @@
   <script>
 
   $.ajax({
-    url: "https://raw.githubusercontent.com/LinusMelb/articles/master/articles.json",
+    url: "https://raw.githubusercontent.com/LinusMelb/articles/master/articles.json?"+ (Math.random() * 10000),
     type: 'GET',
     crossDomain: true,
     // dataType: 'jsonp', //change the datatype to 'jsonp' works in most cases
